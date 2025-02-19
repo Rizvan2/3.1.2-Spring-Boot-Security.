@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователь</title>
+</head>
+<body>
+<p>Username:
+    <span th:text="${user.username}"></span>
+</p>
+<p>Password:
+    <span th:text="${user.password}"></span></p>
+<p>Email:
+    <span th:text="${user.email}"></span></p>
+<p>Roles:
+    <span th:each="role : ${user.roles}" th:text="${role.getName()} + ' '"></span>
+</p>
+
+<a th:href="@{/admin/edit(id=${user.getId()})}">Обновить пользователя</a><br/><br/>
+<form th:action="@{/admin/delete(id=${user.getId()})}"
+      method="post" onsubmit="return confirm('Вы уверены, что хотите удалить этого пользователя?');">
+    <button type="submit">Удалить пользователя</button><br/><br/>
+</form>
+<a th:href="@{/admin}">Вернуться на главную страницу</a><br/><br/>
+<div>
+    <form action="#" th:action="@{/logout}" method="post" onsubmit="return confirm('Вы уверены, что хотите выйти из акаунта?');">
+        <button type="submit">Выйти</button>
+    </form>
+</div>
+</body>
+</html>
