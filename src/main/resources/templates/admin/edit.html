@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update User</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/admin/update(id=${user.getId()})}" th:object="${user}">
+    <label for="username">Enter UserName </label><br/>
+    <input type="text" th:field="*{username}" id="username">
+    <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> UserName Error</div>
+    <br/>
+    <label for="email">Enter email </label><br/>
+    <input type="text" th:field="*{email}" id="email">
+    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> Email Error</div>
+    <br/>
+    <label for="password">Enter New Password</label><br/>
+    <input type="password" th:field="*{password}" id="password" placeholder="New Password">
+    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+    <br/>
+    <label>Roles:</label><br/>
+    <label>
+        <input type="checkbox" name="selectedRoleIds" value="1" />
+        Пользователь
+    </label><br/>
+    <label>
+        <input type="checkbox" name="selectedRoleIds" value="2" />
+        Администратор
+    </label><br/>
+    <input type="submit" value="Update!"><br/><br/>
+    <a th:href="@{/admin}">Вернутся на главную страницу</a>
+</form><br/>
+<div>
+    <form action="#" th:action="@{/logout}" method="post" onsubmit="return confirm('Вы уверены, что хотите выйти из акаунта?');">
+        <button type="submit">Выйти</button>
+    </form>
+</div>
+</body>
+</html>
